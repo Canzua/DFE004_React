@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import MovieCard from '../components/MovieCard';
 
 import './MoviesGrid.css'
@@ -13,13 +13,11 @@ const Home = () => {
 
         const res = await fetch(url);
         const data = await res.json();
-
         setTopMovies(data.results);
     };
 
     useEffect(() => {
         const topRatedUrl = `${moviesURL}top_rated?${apiKey}`;
-
         getTopRatedMovies(topRatedUrl);
     }, []);
 
@@ -27,8 +25,8 @@ const Home = () => {
         <div className='container'>
             <h2 className='title'>Melhores Filmes</h2>
             <div className='movies-container'>
-                {topMovies.length === 0 && <p>Carregando...</p>}
-                {topMovies.length > 0 && topMovies.map((movie) => <MovieCard key={movie.id}movie={movie} />)}
+                {topMovies.length > 0 && 
+                topMovies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
             </div>
         </div>
     );
