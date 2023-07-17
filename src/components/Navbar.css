@@ -2,8 +2,9 @@
     display:flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 2rem 2rem;
     background-color: #121212;
+    font-size: 2rem;
 }
 
 #navbar h2 a {
@@ -40,7 +41,6 @@
     background-color: transparent;
     color: #F7d354;
 }
-
 
 #navbar ul {
     display: flex;
