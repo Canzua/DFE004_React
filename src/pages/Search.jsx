@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 
 const searchURL = import.meta.env.VITE_SEARCH;
@@ -8,10 +8,13 @@ const apiKey = import.meta.env.VITE_API_KEY;
 import './MoviesGrid.css';
 
 const Search = () => {
-    const [searchParams] = useSearchParams();
-    
-    const [movies, setMovies] = useState([]);
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
     const query = searchParams.get('q');
+    const director = searchParams.get('director');
+    const gender = searchParams.get('gender');
+
+    const [movies, setMovies] = useState([]);
 
     const getSearchedMovies = async (url) => {
         const res = await fetch(url);
@@ -20,9 +23,9 @@ const Search = () => {
     };
 
     useEffect(() => {
-        const searchWithQueryURL = `${searchURL}?${apiKey}&query=${query}`;
+        const searchWithQueryURL = `${searchURL}?${apiKey}&query=${query}&director=${director}&with_genders=${gender}`;
         getSearchedMovies(searchWithQueryURL);
-    }, [query]);
+    }, [query, director, gender]);
         
     return (
         <div className='container'>
